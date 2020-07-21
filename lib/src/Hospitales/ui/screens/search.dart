@@ -54,13 +54,16 @@ class Search extends StatelessWidget {
     );
 
 
-    return Column(
-      children: <Widget>[
-        HeaderSearch(),
-        title,
-        description,
-        Pins()
-      ],
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Column(
+        children: <Widget>[
+          HeaderSearch(),
+          title,
+          description,
+          Pins()
+        ],
+      ),
     );
 
   }

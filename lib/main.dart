@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import './src/Hospitales/ui/screens/search.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:disponi_hospi/src/User/bloc/bloc_user.dart';
+
+import 'package:disponi_hospi/src/Hospitales/ui/screens/home.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
             visualDensity: VisualDensity.adaptivePlatformDensity,
           ),
-          home: Search() //MyHomePage(title: 'Flutter Demo Home Page'),
+          home: Home() //MyHomePage(title: 'Flutter Demo Home Page'),
         ),
         bloc: UserBloc()
     );
