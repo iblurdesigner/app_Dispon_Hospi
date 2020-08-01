@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/header_search.dart';
-import 'form_01.dart';
+import 'form_00.dart';
 import 'search.dart';
 
 class Home extends StatelessWidget {
@@ -13,7 +13,7 @@ class Home extends StatelessWidget {
       children: <Widget>[
         Container(
           margin: EdgeInsets.only(
-              top: 40,
+              top: 15,
               left: 30,
               right: 30
           ),
@@ -36,7 +36,7 @@ class Home extends StatelessWidget {
       child: RaisedButton(
         onPressed: () {
           Navigator.push(context, new MaterialPageRoute(
-              builder: (context) => Form01()
+              builder: (context) => Form00()
           )
           );
         },
@@ -67,7 +67,7 @@ class Home extends StatelessWidget {
       children: <Widget>[
         Container(
           margin: EdgeInsets.only(
-              top: 40,
+              top: 15,
               left: 30,
               right: 30
           ),
