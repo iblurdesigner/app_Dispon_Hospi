@@ -1,3 +1,4 @@
+import 'package:disponi_hospi/src/services/routes.dart';
 import 'package:flutter/material.dart';
 import '../widgets/header_search.dart';
 import 'form_02.dart';
@@ -5,6 +6,9 @@ import '../widgets/dropdownbutton.dart';
 
 
 class Form01 extends StatelessWidget {
+
+  final dynamic dataEvaluated;
+  Form01({this.dataEvaluated});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +34,7 @@ class Form01 extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-        )
+        ),
       ],
     );
 
