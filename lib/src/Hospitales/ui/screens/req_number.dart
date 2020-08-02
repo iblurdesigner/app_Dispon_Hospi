@@ -1,12 +1,20 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import '../widgets/header_search.dart';
+import 'package:http/http.dart' as http;
+import 'package:disponi_hospi/src/Hospitales/ui/widgets/header_search.dart';
+import 'package:disponi_hospi/src/services/routes.dart';
 import 'message.dart';
 
 
 class ReqNumber extends StatelessWidget {
+
+  final EvaluationData evaluationData;
+  ReqNumber({this.evaluationData});
+  final phoneController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     //throw UnimplementedError();
 
     final Advertencia = Column (
@@ -65,6 +73,7 @@ class ReqNumber extends StatelessWidget {
         bottom: 20
       ),
       child: TextField(
+        controller: phoneController,
         style: TextStyle(
             fontFamily: 'Monserrat',
             fontSize: 16,
@@ -85,7 +94,7 @@ class ReqNumber extends StatelessWidget {
       child: RaisedButton(
         onPressed: () {
           Navigator.push(context, new MaterialPageRoute(
-              builder: (context) => Message()
+              builder: (context) => storageEvaluatedPhone(evaluationData, phoneController.text)
           )
           );
         },
@@ -106,14 +115,8 @@ class ReqNumber extends StatelessWidget {
         shape: new RoundedRectangleBorder(
           borderRadius: new BorderRadius.circular(30.0),
         ),
-
       ),
-
     );
-
-
-
-
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -131,4 +134,25 @@ class ReqNumber extends StatelessWidget {
     );
   }
 
+  storageEvaluatedPhone(EvaluationData evaluationData, String phone) {
+    final evaluatedData = EvaluatedData(idEvaluated: evaluationData.idEvaluated, phone: phone);
+    return sendEvaluated(evaluatedData);
+  }
+
+  sendEvaluated(evaluatedData) {
+    return FutureBuilder<http.Response>(
+      future: Routes.postUpdateEvaluated(evaluatedData),
+      builder: (context, AsyncSnapshot<http.Response> response) {
+        if (response.hasData && response.data.statusCode==200) {
+          var data = jsonDecode(response.data.body);
+          debugPrint(data.toString());
+          return Message();
+        } else if (response.hasError) {
+          return Text("${response.error}");
+        } else {
+          return CircularProgressIndicator();
+        }
+      }
+    );
+  }
 }
