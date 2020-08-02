@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../widgets/header_search.dart';
 import '../widgets/pins.dart';
+import '../../resources/Maps.dart';
+
 
 class Search extends StatelessWidget {
   @override
@@ -12,7 +14,7 @@ class Search extends StatelessWidget {
       children: <Widget>[
         Container(
           margin: EdgeInsets.only(
-            top: 40,
+            top: 10,
             left: 30,
             right: 30
           ),
@@ -34,9 +36,9 @@ class Search extends StatelessWidget {
       children: <Widget>[
         Container(
           margin: EdgeInsets.only(
-            top: 17.0,
-            left: 97.0,
-            right: 97.0
+            top: 5.0,
+            left: 10.0,
+            right: 10.0
           ),
 
           child: Text(
@@ -61,7 +63,8 @@ class Search extends StatelessWidget {
           HeaderSearch(),
           title,
           description,
-          Pins()
+          Pins(),
+          Maps()
         ],
       ),
     );
