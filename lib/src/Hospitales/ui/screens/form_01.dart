@@ -1,18 +1,18 @@
-import 'package:disponi_hospi/src/services/routes.dart';
+import 'dart:core';
 import 'package:flutter/material.dart';
-import '../widgets/header_search.dart';
+import 'package:disponi_hospi/src/Hospitales/ui/widgets/dropdownbutton.dart';
+import 'package:disponi_hospi/src/Hospitales/ui/widgets/header_search.dart';
+import 'package:disponi_hospi/src/services/routes.dart';
 import 'form_02.dart';
-import '../widgets/dropdownbutton.dart';
-
 
 class Form01 extends StatelessWidget {
 
-  final dynamic dataEvaluated;
-  Form01({this.dataEvaluated});
+  final EvaluatedData evaluatedData;
+  final EvaluationData evaluationData = EvaluationData();
+  Form01({this.evaluatedData});
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     //throw UnimplementedError();
 
     final Question01 = Column (
@@ -38,7 +38,7 @@ class Form01 extends StatelessWidget {
       ],
     );
 
-
+    final dropDownButtonCovid1 = DropDownButtonCovid();
 
     final Question02 = Column (
       children: <Widget>[
@@ -63,13 +63,18 @@ class Form01 extends StatelessWidget {
       ],
     );
 
+    final dropDownButtonCovid2 = DropDownButtonCovid();
 
     final buttonContinuar = Center(
       child: RaisedButton(
         onPressed: () {
           Navigator.push(context, new MaterialPageRoute(
-              builder: (context) => Form02()
-          )
+              builder: (context) => storageEvaluationData(
+                evaluatedData, 
+                dropDownButtonCovid1.getDropDownButtonValue(),
+                dropDownButtonCovid2.getDropDownButtonValue()
+              )
+            )
           );
         },
 
@@ -89,14 +94,8 @@ class Form01 extends StatelessWidget {
         shape: new RoundedRectangleBorder(
           borderRadius: new BorderRadius.circular(30.0),
         ),
-
       ),
-
     );
-
-
-
-
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -105,14 +104,17 @@ class Form01 extends StatelessWidget {
         children: <Widget>[
           HeaderSearch(),
           Question01,
-          DropDownButtonCovid(),
+          dropDownButtonCovid1,
           Question02,
-          DropDownButtonCovid(),
+          dropDownButtonCovid2,
           buttonContinuar
         ],
       ),
-
     );
   }
 
+  storageEvaluationData(EvaluatedData evaluatedData, String fingers, String breathe) {
+    evaluationData.setData(fingers, breathe, '', '', evaluatedData.idEvaluated);
+    return Form02(evaluationData: evaluationData);
+  }
 }

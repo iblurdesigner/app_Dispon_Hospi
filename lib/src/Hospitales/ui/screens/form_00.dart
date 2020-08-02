@@ -1,13 +1,11 @@
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
-import 'package:flutter/src/services/text_formatter.dart';
-import 'package:http/http.dart' as http;
 import 'dart:core';
-import '../widgets/header_search.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:disponi_hospi/src/Hospitales/ui/widgets/header_search.dart';
+import 'package:disponi_hospi/src/services/routes.dart';
+import 'package:flutter/src/services/text_formatter.dart';
 import 'form_01.dart';
-import '../../../services/routes.dart';
-
 
 class Form00 extends StatelessWidget {
 
@@ -29,23 +27,6 @@ class Form00 extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   HeaderSearch(),
-                  /*Container(
-                    margin: EdgeInsets.only(
-                        top: 5,
-                        left: 30,
-                        right: 30
-                    ),
-                    child: Text(
-                      "Ciudad:",
-                      style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 22.0,
-                          fontWeight: FontWeight.w600,
-                          color: Color.fromRGBO(32, 94, 141, 1)
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),*/
                   Container(
                     margin: EdgeInsets.only(
                       top: 20,
@@ -139,8 +120,8 @@ class Form00 extends StatelessWidget {
         if (response.hasData && response.data.statusCode==200) {
           var data = jsonDecode(response.data.body);
           debugPrint(data.toString());
-          final dataEvaluated = DataEvaluated(idEvaluated: data['idEvaluado']);
-          return Form01(dataEvaluated: dataEvaluated);
+          final evaluatedData = EvaluatedData(idEvaluated: data['idEvaluado']);
+          return Form01(evaluatedData: evaluatedData);
         } else if (response.hasError) {
           return Text("${response.error}");
         } else {
