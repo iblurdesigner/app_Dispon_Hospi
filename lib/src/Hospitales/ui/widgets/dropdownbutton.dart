@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
 
 class DropDownButtonCovid extends StatefulWidget{
+
+  _DropDownButtonCovid dropDownButtonCovid;
+
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     //throw UnimplementedError();
-
-    return _DropDownButtonCovid();
+    dropDownButtonCovid = _DropDownButtonCovid();
+    return dropDownButtonCovid;
   }
 
+  String getDropDownButtonValue() {
+    return dropDownButtonCovid.dropdownValue;
+  }
 }
 
 class _DropDownButtonCovid extends State<DropDownButtonCovid> {
-  String dropdownValue = 'Sí';
+
+  String dropdownValue = 'No';
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     //throw UnimplementedError();
 
-    return           DropdownButton<String> (
+    return DropdownButton<String> (
         value: dropdownValue,
         icon: Icon(Icons.arrow_downward),
         iconSize: 24,
@@ -32,7 +37,7 @@ class _DropDownButtonCovid extends State<DropDownButtonCovid> {
           color: Colors.deepPurpleAccent,
         ),
         onChanged: (String newValue) {
-          setState( () {
+          setState(() {
             dropdownValue = newValue;
           });
         },
@@ -43,8 +48,7 @@ class _DropDownButtonCovid extends State<DropDownButtonCovid> {
             child: Text(value),
           );
         })
-            .toList()
+        .toList()
     );
   }
-
 }
